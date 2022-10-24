@@ -56,7 +56,7 @@ class MainActivityViewModel(application: Application) : BaseViewModel(applicatio
 
     init {
         //        Log.d("AppLog", "MainActivityViewModel CTOR")
-//        Log.d("AppLog", "bluetoothAdapter.state:${getBluetoothAdapterStateStr(bluetoothAdapter.state)} ${checkIfConnectedToHeadset(bluetoothAdapter)}")
+        Log.d("AppLog", "bluetoothAdapter.state:${getBluetoothAdapterStateStr(bluetoothAdapter.state)} ${checkIfConnectedToHeadset(bluetoothAdapter)}")
         updateBtStates()
         val pollingBtStateRunnable = object : Runnable {
             override fun run() {
@@ -67,7 +67,7 @@ class MainActivityViewModel(application: Application) : BaseViewModel(applicatio
         // Establish connection to the proxy.
         val serviceListener = object : BluetoothProfile.ServiceListener {
             override fun onServiceConnected(profile: Int, bluetoothProfile: BluetoothProfile) {
-//                Log.d("AppLog", "onServiceConnected  bluetoothAdapter.state:${getBluetoothAdapterStateStr(bluetoothAdapter.state)} ${checkIfConnectedToHeadset(bluetoothAdapter)}")
+                Log.d("AppLog", "onServiceConnected  bluetoothAdapter.state:${getBluetoothAdapterStateStr(bluetoothAdapter.state)} ${checkIfConnectedToHeadset(bluetoothAdapter)}")
                 this@MainActivityViewModel.bluetoothHeadsetProfile = bluetoothProfile
                 handler.removeCallbacks(pollingBtStateRunnable)
                 pollingBtStateRunnable.run()
@@ -89,7 +89,7 @@ class MainActivityViewModel(application: Application) : BaseViewModel(applicatio
             }
 
             override fun onServiceDisconnected(profile: Int) {
-//                Log.d("AppLog", "onServiceDisconnected bluetoothAdapter.state:${getBluetoothAdapterStateStr(bluetoothAdapter.state)}  ${checkIfConnectedToHeadset(bluetoothAdapter)}")
+                Log.d("AppLog", "onServiceDisconnected bluetoothAdapter.state:${getBluetoothAdapterStateStr(bluetoothAdapter.state)}  ${checkIfConnectedToHeadset(bluetoothAdapter)}")
                 handler.removeCallbacks(pollingBtStateRunnable)
                 updateBtStates()
                 //                connectedDevicesLiveData.value = ConnectedDevicesState.BluetoothIsTurnedOff
